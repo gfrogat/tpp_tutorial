@@ -72,6 +72,10 @@ Navigate to the file [tox21_config.json](./configs/tox21_configs.json) update it
 
 As soon as we have the variables set we can setup a task graph, also called DAG.
 
+### Connections
+
+Next navigate to `Admin > Connections` and update for the connection `spark_default` the `Host` field with the Spark master url `spark//$(hostname):7077`.
+
 ### DAGS
 
 We will use the file [pipeline_tox21.py](./dags/pipeline_tox21.py). Symlink the local `dags` folder to `$AIRFLOW_HOME/dags` folder (usually this would be `~/airflow/dags`).
