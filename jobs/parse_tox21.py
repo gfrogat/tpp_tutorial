@@ -141,6 +141,7 @@ if __name__ == "__main__":
         sc = spark.sparkContext
 
         sdf_files = list(args.input_dir_path.expanduser().glob("*.sdf"))
+        assert len(sdf_files) == 3
         sdf_files = sc.parallelize(sdf_files)
 
         compounds = sdf_files.flatMap(parse_tox21_compounds).toDF(
@@ -169,5 +170,8 @@ if __name__ == "__main__":
         )
     except Exception as e:
         logging.exception(e)
+        raise SystemExit(
+            "Spark Job encountered a problem. Check the logs for more information"
+        )
     finally:
         spark.stop()

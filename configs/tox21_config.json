@@ -1,5 +1,6 @@
 {
   "tox21_data_root": "/home/user/data",
   "tpp_tutorial_home": "/home/user/tpp_tutorial",
-  "tpp_python_home": "/home/user/tpp_python"
+  "tpp_python_home": "/home/user/tpp_python",
+  "conda_prefix": "/home/user/miniconda3/envs/tpp_tutorial"
 }

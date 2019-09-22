@@ -55,6 +55,10 @@ with DAG(
         task_id="parse_tox21",
         application=parse_tox21_app,
         application_args=parse_tox21_app_args,
+        conf={
+            "spark.pyspark.python": "{{ params.conda_prefix }}/bin/python",
+            "spark.pyspark.driver.python": "{{ params.conda_prefix }}/bin/python",
+        },
     )
 
     # Process Tox21 Parquet files using PySpark
@@ -69,6 +73,10 @@ with DAG(
         task_id="process_tox21",
         application=process_tox21_app,
         application_args=process_tox21_app_args,
+        conf={
+            "spark.pyspark.python": "{{ params.conda_prefix }}/bin/python",
+            "spark.pyspark.driver.python": "{{ params.conda_prefix }}/bin/python",
+        },
     )
 
     # Compute Tox Fingerprints (Tox Features used for Tox21 Challenge)
@@ -89,6 +97,10 @@ with DAG(
         task_id="compute_tox_features",
         application=compute_tox_features_app,
         application_args=compute_tox_features_args,
+        conf={
+            "spark.pyspark.python": "{{ params.conda_prefix }}/bin/python",
+            "spark.pyspark.driver.python": "{{ params.conda_prefix }}/bin/python",
+        },
         params={
             "input_path": "flattened_data.parquet",
             "output_path": "features_tox.parquet",
