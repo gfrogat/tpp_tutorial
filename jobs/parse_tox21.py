@@ -32,8 +32,8 @@ fold_map = {
 
 tox21_id_map = {
     "tox21_10k_data_all.sdf": "DSSTox_CID",  # train
-    "tox21_10k_challenge_test.sdf": "Sample ID",  # test
-    "tox21_10k_challenge_score.sdf": "Compound ID",  # score
+    "tox21_10k_challenge_test.sdf": "Compound ID",  # test
+    "tox21_10k_challenge_score.sdf": "Sample ID",  # score
 }
 
 
