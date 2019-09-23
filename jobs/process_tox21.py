@@ -87,6 +87,7 @@ if __name__ == "__main__":
                     F.collect_set(F.struct(F.col("global_id"), F.col("activity")))
                 )
             ).alias("labels"),
+            F.collect_set("fold").alias("fold"),
         )
 
         flattened_data.write.parquet(

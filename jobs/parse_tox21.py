@@ -30,29 +30,22 @@ fold_map = {
     "tox21_10k_challenge_score.sdf": 2,  # score
 }
 
+tox21_id_map = {
+    "tox21_10k_data_all.sdf": "DSSTox_CID",  # train
+    "tox21_10k_challenge_test.sdf": "Sample ID",  # test
+    "tox21_10k_challenge_score.sdf": "Compound ID",  # score
+}
+
 
 def parse_tox21_compounds(sdf_path):
+    tox21_id_name = tox21_id_map[sdf_path.name]
+
     res = []
     suppl = Chem.SDMolSupplier(sdf_path.as_posix())
 
     for mol in suppl:
         if mol is not None:
-            prop_names = mol.GetPropNames()
-
-            ################################################################
-            # Make sure that `Compound ID` == `Sample ID` for test set items
-            if "Sample ID" in prop_names:
-                sample_id = mol.GetProp("Sample ID")
-                compound_id = mol.GetProp("Compound ID")
-
-                if sample_id[:-3] != compound_id:
-                    continue
-            ################################################################
-
-            if "Compound ID" in prop_names:
-                tox21_id = mol.GetProp("Compound ID")
-            else:
-                tox21_id = mol.GetProp("DSSTox_CID")
+            tox21_id = mol.GetProp(tox21_id_name)
 
             inchikey = Chem.MolToInchiKey(mol)
             mol_block = Chem.MolToMolBlock(mol)
@@ -68,19 +61,16 @@ def parse_tox21_compounds(sdf_path):
 
 
 def parse_tox21_assays(sdf_path):
+    tox21_id_name = tox21_id_map[sdf_path.name]
+
     res = []
     suppl = Chem.SDMolSupplier(sdf_path.as_posix())
 
     for mol in suppl:
         if mol is not None:
-            prop_names = mol.GetPropNames()
+            tox21_id = mol.GetProp(tox21_id_name)
 
-            if "Compound ID" in prop_names:
-                tox21_id = mol.GetProp("Compound ID")
-            else:
-                tox21_id = mol.GetProp("DSSTox_CID")
-
-            for prop_name in prop_names:
+            for prop_name in mol.GetPropNames():
                 if prop_name.startswith("NR-") or prop_name.startswith("SR-"):
                     assay_id = prop_name
                     activity = int(mol.GetProp(prop_name))
