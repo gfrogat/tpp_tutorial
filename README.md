@@ -74,7 +74,7 @@ As soon as we have the variables set we can setup a task graph, also called DAG.
 
 ### Connections
 
-Next navigate to `Admin > Connections` and update for the connection `spark_default` the `Host` field with the Spark master url `spark//$(hostname):7077`.
+Next navigate to `Admin > Connections` and update for the connection `spark_default` the `Host` field with the Spark master url `spark://$(hostname):7077`.
 
 ### DAGS
 
