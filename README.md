@@ -5,10 +5,12 @@
 Download [SDKMan!](https://sdkman.io/) and install Java 8, Scala and Spark.
 
 ```bash
-sdk install java 8.0.202-amzn   # optionally update to latest version
+sdk install java 8.0.202-amzn   # optionally update to latest 8.x release
 sdk install scala 2.11.12
 sdk install spark 2.4.3
 ```
+
+Make sure you install the exact versions mentioned above, otherwise you might encounter unexpected issues.
 
 ## Python Libraries
 
